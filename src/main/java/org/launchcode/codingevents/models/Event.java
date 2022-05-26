@@ -1,7 +1,5 @@
 package org.launchcode.codingevents.models;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 public class Event {
@@ -19,12 +17,23 @@ public class Event {
     @Email(message = "Invalid email. Try again.")
     private String contactEmail;
 
+    @NotBlank(message = "This field cannot be left blank")
+    private String location;
+
+    @AssertTrue(message = "You must register for the event")
+    private Boolean registrationStatus;
+
+    @Positive(message = "Number of attendees must be one or more")
+    private int numberOfAttendees;
     public Event(){}
     public Event(String name, String description) {
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
         this.id = nextId;
+        this.location = location;
+        this.registrationStatus = registrationStatus;
+        this.numberOfAttendees = numberOfAttendees;
         nextId++;
     }
 
@@ -54,6 +63,26 @@ public class Event {
 
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Boolean getRegistrationStatus() {
+        return registrationStatus;
+    }
+
+    public void setRegistrationStatus(Boolean registrationStatus) {
+        this.registrationStatus = registrationStatus;
+    }
+
+    public int getNumberOfAttendees() {
+        return numberOfAttendees;
     }
 
     @Override
