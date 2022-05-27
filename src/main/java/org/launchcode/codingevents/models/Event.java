@@ -17,24 +17,31 @@ public class Event {
     @Email(message = "Invalid email. Try again.")
     private String contactEmail;
 
-    @NotBlank(message = "This field cannot be left blank")
-    private String location;
+    private EventType type;
 
-    @AssertTrue(message = "You must register for the event")
-    private Boolean registrationStatus;
+    //@NotBlank(message = "This field cannot be left blank")
+    //private String location;
 
-    @Positive(message = "Number of attendees must be one or more")
-    private int numberOfAttendees;
-    public Event(){}
-    public Event(String name, String description) {
+    //@AssertTrue(message = "You must register for the event")
+    //private Boolean registrationStatus;
+
+    //@Positive(message = "Number of attendees must be one or more")
+    //private int numberOfAttendees;
+    public Event(){
+        this.id = nextId;
+        nextId++;
+    }
+    public Event(String name, String description, String contactEmail, EventType type) {
+        this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
-        this.id = nextId;
-        this.location = location;
-        this.registrationStatus = registrationStatus;
-        this.numberOfAttendees = numberOfAttendees;
-        nextId++;
+
+        this.type = type;
+        //this.location = location;
+        //this.registrationStatus = registrationStatus;
+        //this.numberOfAttendees = numberOfAttendees;
+
     }
 
     public int getId() {
@@ -65,25 +72,33 @@ public class Event {
         this.contactEmail = contactEmail;
     }
 
-    public String getLocation() {
-        return location;
+    public EventType getType() {
+        return type;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setType(EventType type) {
+        this.type = type;
     }
 
-    public Boolean getRegistrationStatus() {
-        return registrationStatus;
-    }
+    //public String getLocation() {
+        //return location;
+    //}
 
-    public void setRegistrationStatus(Boolean registrationStatus) {
-        this.registrationStatus = registrationStatus;
-    }
+    //public void setLocation(String location) {
+        //this.location = location;
+    //}
 
-    public int getNumberOfAttendees() {
-        return numberOfAttendees;
-    }
+    //public Boolean getRegistrationStatus() {
+        //return registrationStatus;
+    //}
+
+    //public void setRegistrationStatus(Boolean registrationStatus) {
+        //this.registrationStatus = registrationStatus;
+    //}
+
+    //public int getNumberOfAttendees() {
+        //return numberOfAttendees;
+    //}
 
     @Override
     public String toString() {
