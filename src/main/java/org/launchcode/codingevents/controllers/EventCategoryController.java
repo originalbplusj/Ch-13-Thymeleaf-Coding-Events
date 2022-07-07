@@ -21,7 +21,7 @@ public class EventCategoryController {
     @Autowired
     private EventCategoryRepository eventCategoryRepository;
 
-    @GetMapping
+    @GetMapping("index")
     public String displayAllCategories(Model model){
         model.addAttribute("title","All Categories");
         model.addAttribute("categories", eventCategoryRepository.findAll());
@@ -43,6 +43,7 @@ public class EventCategoryController {
             return "eventsCategories/create";
         }
         eventCategoryRepository.save(eventCategory);
-        return "redirect:";
+        //return "redirect:";
+        return "eventCategories/index";
     }
 }
