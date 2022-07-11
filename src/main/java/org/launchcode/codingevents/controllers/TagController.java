@@ -20,7 +20,7 @@ public class TagController {
     @Autowired
     TagRepository tagRepository;
 
-    @GetMapping("index")
+    @GetMapping
     public String displayTags(Model model) {
         model.addAttribute("title", "All Tags");
         model.addAttribute("tags", tagRepository.findAll());
@@ -42,6 +42,6 @@ public class TagController {
             return "tags/create";
         }
         tagRepository.save(tag);
-        return "tags/index";
+        return "redirect:";
     }
 }
