@@ -34,6 +34,7 @@ public class EventController {
         if(categoryId == null) {
             model.addAttribute("title", "All Events");
             model.addAttribute("events", eventRepository.findAll());
+            System.out.println("event controller good so far");
         }else{
             Optional<EventCategory> result = eventCategoryRepository.findById(categoryId);
             if (result.isEmpty()){
