@@ -29,24 +29,38 @@ public class EventController {
 
     @Autowired
     private TagRepository tagRepository;
+
     @GetMapping
-    public String displayAllEvents(@RequestParam(required = false) Integer categoryId, Model model){
-        if(categoryId == null) {
+    public String displayAllEvents(@RequestParam(required = false) Integer categoryId, @RequestParam(required = false) Integer tagId, Model model) {
+        if (categoryId == null && tagId == null) {
             model.addAttribute("title", "All Events");
             model.addAttribute("events", eventRepository.findAll());
-            System.out.println("event controller good so far");
-        }else{
+
+        } else if (categoryId != null) {
             Optional<EventCategory> result = eventCategoryRepository.findById(categoryId);
-            if (result.isEmpty()){
+            if (result.isEmpty()) {
                 model.addAttribute("title", "Invalid Category ID: " + categoryId);
-            }else{
+            } else {
                 EventCategory category = result.get();
                 model.addAttribute("title", "Events in category: " + category.getName());
                 model.addAttribute("events", category.getEvents());
             }
+        } else if (tagId != null) {
+            Optional<Tag> tagResult = tagRepository.findById(tagId);
+            if (tagResult.isEmpty()) {
+                model.addAttribute("title", "Invalid Tag ID: " + tagId);
+            } else {
+                Tag tag = tagResult.get();
+                model.addAttribute("title", "Events with tag: " + tag.getName());
+                model.addAttribute("events", tag.getEvents());
+                System.out.println("tag code complete");
+            }
         }
         return "events/index";
     }
+
+
+
 
     //lives at /events/create
     @GetMapping("create")
